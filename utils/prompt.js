@@ -67,6 +67,7 @@ const main = async () => {
                 console.log(err)
             }
             console.log(result)
+            main();
         })
     }
     if (viewAllDept.start === 'add a role') {
@@ -117,6 +118,34 @@ const main = async () => {
 
             }
         )
+        // figure out how to add the department_id properly?
+        newRole.department = dept.department;
+        console.log(newRole)
+        db.query(`INSERT INTO department (name)
+                    VALUES ("${newRole.department})`, (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(result)
+            }
+        }
+        )
+        db.query(`INSERT INTO role (title, salary, department_id)
+                    VALUES ("${newRole.roleTitle}", "${newRole.salary}")`, (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(result)
+            }
+        })
+    }
+    //add new employee
+    if (viewAllDept.start === 'add an employee') {
+
+    }
+    //update employee role
+    if (viewAllDept.start === 'update an employee role') {
+
     }
 }
 
