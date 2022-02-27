@@ -33,10 +33,28 @@ const main = async () => {
     }
     if (viewAllDept.start === 'view all employees') {
         //need to figure out how to do inner join to output manager names instead of manager id #
-        db.query((`SELECT employee.id AS employee_id, employee.first_name, employee.last_name, role.title AS job_title, department.name AS department, role.salary, employee.manager_id
-                    FROM employee 
-                    JOIN role on employee.role_id=role.id
-                    JOIN department ON role.department_id=department.id
+        // SELECT
+        // emp.id,
+        //     emp.first_name,
+        //     emp.last_name,
+        //     role.title job_title,
+        //         department.name department,
+        //             role.salary,
+        //             CONCAT(emp.first_name,
+        //                 ' ',
+        //                 emp.last_name) AS Manager
+        //             FROM
+        //         employee emp
+        //             INNER JOIN
+        //         role ON emp.role_id = role.id
+        //             INNER JOIN
+        //         department ON role.department_id = department.id
+        //     ;
+
+        db.query((`SELECT employee.id AS employee_id, employee.first_name, employee.last_name, role.title AS job_title, department.name AS department, role.salary, CONCAT(employee.first_name, ' ', employee.last_name) AS Manager
+                    FROM employee
+                    INNER JOIN role on employee.role_id=role.id 
+                    INNER JOIN department ON role.department_id=department.id
                     `), (err, rows) => {
             if (err) {
                 console.log(err);
@@ -141,11 +159,9 @@ const main = async () => {
     }
     //add new employee
     if (viewAllDept.start === 'add an employee') {
-
     }
     //update employee role
     if (viewAllDept.start === 'update an employee role') {
-
     }
 }
 
