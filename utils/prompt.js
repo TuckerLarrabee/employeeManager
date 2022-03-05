@@ -220,25 +220,148 @@ const main = async () => {
     
     //update employee role
     if (viewAllDept.start === 'update an employee role') {
-        let update = {}
-        db.query(`SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS employee FROM employee`, (err,row) => {
-            if (err) {
-                console.log(err);
-                return;
+            const updateEmployee = await inquirer.prompt({
+                type: 'list',
+                   name: 'employee',
+                   message: 'Please select the employee you would like to update',
+                   choices: ['Rick Smith', 'Bob Johnson', 'Mike Chan', 'Kevin Tupik']
+            })
+            if (updateEmployee.employee === 'Rick Smith') {
+                updateEmployee.first = 'Rick'
+                const updateRole = await inquirer.prompt({
+                    type: 'list',
+                    name: 'updateRole',
+                    message: 'Please select the new role of this employee',
+                    choices: ["Sales", "Finance", "Engineering", "Legal"]
+                })
+                if (updateRole.updateRole === 'Sales') {
+                    console.log("Test")
+                    updateEmployee.updateRole = 1
+                }
+                if (updateRole.updateRole === 'Finance') {
+                    console.log("Test2")
+                    updateEmployee.updateRole = 2
+                }
+                if (updateRole.updateRole === 'Engineering') {
+                    console.log("Test3")
+                    updateEmployee.updateRole = 3
+                }
+                if (updateRole.updateRole === 'Legal') {
+                    console.log("Test4")
+                    updateEmployee.updateRole = 4
+                }
+                db.query(`UPDATE employee
+                          SET role_id = "${updateEmployee.updateRole}"
+                          WHERE first_name = "${updateEmployee.first}"`, (err,row) => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log(row)
+                            }
+                          })
             }
-            let update = +{row};
-            console.log(update)
-            return update;
-        });
-        
-
-
-        // const updateEmployee = await inquirer.prompt({
-        //     type: 'list',
-        //        name: 'manager',
-        //        message: "Please select the manager of the employee you would like to add",
-        //        choices: ["Bob Johnson", "Mike Chan", "No manager"]
-        // })
+            if (updateEmployee.employee === 'Bob Johnson') {
+                updateEmployee.first = 'Bob'
+                const updateRole = await inquirer.prompt({
+                    type: 'list',
+                    name: 'updateRole',
+                    message: 'Please select the new role of this employee',
+                    choices: ["Sales", "Finance", "Engineering", "Legal"]
+                })
+                if (updateRole.updateRole === 'Sales') {
+                    console.log("Test")
+                    updateEmployee.updateRole = 1
+                }
+                if (updateRole.updateRole === 'Finance') {
+                    console.log("Test2")
+                    updateEmployee.updateRole = 2
+                }
+                if (updateRole.updateRole === 'Engineering') {
+                    console.log("Test3")
+                    updateEmployee.updateRole = 3
+                }
+                if (updateRole.updateRole === 'Legal') {
+                    console.log("Test4")
+                    updateEmployee.updateRole = 4
+                }
+                db.query(`UPDATE employee
+                          SET role_id = "${updateEmployee.updateRole}"
+                          WHERE first_name = "${updateEmployee.first}"`, (err,row) => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log(row)
+                            }
+                          })
+            }
+            if (updateEmployee.employee === 'Mike Chan') {
+                updateEmployee.first = 'Mike'
+                const updateRole = await inquirer.prompt({
+                    type: 'list',
+                    name: 'updateRole',
+                    message: 'Please select the new role of this employee',
+                    choices: ["Sales", "Finance", "Engineering", "Legal"]
+                })
+                if (updateRole.updateRole === 'Sales') {
+                    console.log("Test")
+                    updateEmployee.updateRole = 1
+                }
+                if (updateRole.updateRole === 'Finance') {
+                    console.log("Test2")
+                    updateEmployee.updateRole = 2
+                }
+                if (updateRole.updateRole === 'Engineering') {
+                    console.log("Test3")
+                    updateEmployee.updateRole = 3
+                }
+                if (updateRole.updateRole === 'Legal') {
+                    console.log("Test4")
+                    updateEmployee.updateRole = 4
+                }
+                db.query(`UPDATE employee
+                          SET role_id = "${updateEmployee.updateRole}"
+                          WHERE first_name = "${updateEmployee.first}"`, (err,row) => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log(row)
+                            }
+                          })
+            }
+            if (updateEmployee.employee === 'Kevin Tupik') {
+                updateEmployee.first = 'Kevin'
+                const updateRole = await inquirer.prompt({
+                    type: 'list',
+                    name: 'updateRole',
+                    message: 'Please select the new role of this employee',
+                    choices: ["Sales", "Finance", "Engineering", "Legal"]
+                })
+                if (updateRole.updateRole === 'Sales') {
+                    console.log("Test")
+                    updateEmployee.updateRole = 1
+                }
+                if (updateRole.updateRole === 'Finance') {
+                    console.log("Test2")
+                    updateEmployee.updateRole = 2
+                }
+                if (updateRole.updateRole === 'Engineering') {
+                    console.log("Test3")
+                    updateEmployee.updateRole = 3
+                }
+                if (updateRole.updateRole === 'Legal') {
+                    console.log("Test4")
+                    updateEmployee.updateRole = 4
+                }
+                db.query(`UPDATE employee
+                          SET role_id = "${updateEmployee.updateRole}"
+                          WHERE first_name = "${updateEmployee.first}"`, (err,row) => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log(row)
+                            }
+                    })
+            }
     }
 }
 
