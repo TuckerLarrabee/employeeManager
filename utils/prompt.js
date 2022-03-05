@@ -33,16 +33,7 @@ const main = async () => {
     }
     if (viewAllDept.start === 'view all employees') {
         //need to figure out how to do inner join to output manager names instead of manager id #
-        // SELECT
-        // emp.id,
-        //     emp.first_name,
-        //     emp.last_name,
-        //     role.title job_title,
-        //         department.name department,
-        //             role.salary,
-        //             CONCAT(emp.first_name,
-        //                 ' ',
-        //                 emp.last_name) AS Manager
+        // SELECT emp.id, emp.first_name, emp.last_name, role.title job_title, department.name department, role.salary, CONCAT(emp.first_name, ' ', emp.last_name) AS Manager
         //             FROM
         //         employee emp
         //             INNER JOIN
@@ -50,6 +41,8 @@ const main = async () => {
         //             INNER JOIN
         //         department ON role.department_id = department.id
         //     ;
+
+        // "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;"
 
         db.query((`SELECT employee.id AS employee_id, employee.first_name, employee.last_name, role.title AS job_title, department.name AS department, role.salary, CONCAT(employee.first_name, ' ', employee.last_name) AS Manager
                     FROM employee
@@ -136,7 +129,7 @@ const main = async () => {
 
             }
         )
-        // figure out how to add the department_id properly?
+        // figure out how to add the department_id properly? department name will already exist
         newRole.department = dept.department;
         console.log(newRole)
         db.query(`INSERT INTO department (name)
@@ -149,7 +142,7 @@ const main = async () => {
         }
         )
         db.query(`INSERT INTO role (title, salary, department_id)
-                    VALUES ("${newRole.roleTitle}", "${newRole.salary}")`, (err, result) => {
+                    VALUES ("${newRole.roleTitle}", "${newRole.salary}", "${newRole.department}")`, (err, result) => {
             if (err) {
                 console.log(err)
             } else {
