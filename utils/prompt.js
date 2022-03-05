@@ -7,7 +7,7 @@ const main = async () => {
             type: 'list',
             name: 'start',
             message: 'Please select one of the following options',
-            choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update an employee role']
+            choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update an employee role', 'exit']
         })
     if (viewAllDept.start === 'view all departments') {
         db.query((`SELECT id, name FROM department`), (err, rows) => {
@@ -138,6 +138,7 @@ const main = async () => {
             } else {
                 console.log(result)
             }
+            main();
         })
     }
     //add new employee
@@ -209,12 +210,13 @@ const main = async () => {
             console.log(newEmploy) 
 
             db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id)
-                    VALUES ("${newEmploy.firstName}", "${newEmploy.lastName}", "${newEmploy.role}", "${newEmploy.manager}")`, (err, result) => {
+                    VALUES ("${newEmploy.firstName}", "${newEmploy.lastName}", "${newEmploy.role}", ${newEmploy.manager})`, (err, result) => {
             if (err) {
                 console.log(err)
             } else {
                 console.log(result)
             }
+            main();
         })
     }
     
@@ -258,6 +260,7 @@ const main = async () => {
                             } else {
                                 console.log(row)
                             }
+                            main();
                           })
             }
             if (updateEmployee.employee === 'Bob Johnson') {
@@ -292,6 +295,7 @@ const main = async () => {
                             } else {
                                 console.log(row)
                             }
+                            main();
                           })
             }
             if (updateEmployee.employee === 'Mike Chan') {
@@ -326,6 +330,7 @@ const main = async () => {
                             } else {
                                 console.log(row)
                             }
+                            main();
                           })
             }
             if (updateEmployee.employee === 'Kevin Tupik') {
@@ -360,7 +365,11 @@ const main = async () => {
                             } else {
                                 console.log(row)
                             }
+                            main();
                     })
+            }
+            if (viewAllDept.start === 'Exit') {
+                return
             }
     }
 }
